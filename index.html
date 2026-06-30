@@ -234,6 +234,35 @@
       color: #0f766e;
       font-weight: 700;
     }
+    .seller-surface {
+      margin-top: 26px;
+      background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+      border: 1px solid #d9e4f2;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 14px 36px rgba(15,23,42,.07);
+    }
+    .seller-surface-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 20px;
+      align-items: center;
+    }
+    .seller-surface p {
+      color: #475569;
+      margin-bottom: 0;
+    }
+    .seller-surface .badge {
+      margin-bottom: 10px;
+    }
+    .seller-surface-actions {
+      display: grid;
+      gap: 12px;
+    }
+    .seller-surface-note {
+      font-size: 14px;
+      color: #64748b;
+    }
     .faq-wrap {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -254,7 +283,7 @@
       font-size: 14px;
     }
     @media (max-width: 920px) {
-      .hero-grid, .cards, .faq-wrap, .stats {
+      .hero-grid, .cards, .faq-wrap, .stats, .seller-surface-grid {
         grid-template-columns: 1fr;
       }
       h1 { font-size: 38px; }
@@ -359,6 +388,20 @@
           <a class="cta" href="https://buy.stripe.com/3cI8wQ2rVgXd9Fmh0cenS06">Start Micro-Dealer Checkout</a>
           <p class="support-note">Need a custom workflow? Email <a href="mailto:brent@operator.fyi?subject=FlipFlow%20Micro-Dealer%20Pilot">brent@operator.fyi</a>.</p>
         </article>
+      </div>
+      <div class="seller-surface">
+        <div class="seller-surface-grid">
+          <div>
+            <span class="badge">New seller-specific page</span>
+            <h3>Furniture flippers now have a dedicated FlipFlow page built for community posts, listing bios, and profile links.</h3>
+            <p>Instead of sending every prospect to a generic marketplace pitch, route furniture sellers to a tighter page focused on dressers, couches, tables, no-show prevention, and weekend relist speed.</p>
+          </div>
+          <div class="seller-surface-actions">
+            <a class="cta" href="furniture-flippers.html">Open furniture flipper page</a>
+            <a class="cta-secondary" href="https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05">Start Solo Pilot for furniture sellers</a>
+            <div class="seller-surface-note">Use this page anywhere you need a more specific CTA than the homepage.</div>
+          </div>
+        </div>
       </div>
       <div class="faq-wrap">
         <div class="faq">

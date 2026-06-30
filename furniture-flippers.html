@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlipFlow for Furniture Flippers | Sell More Couches, Dressers, and Tables With Less DM Chaos</title>
+  <meta name="description" content="FlipFlow helps furniture flippers rewrite listings, answer buyers faster, reduce no-shows, and move couches, dressers, tables, and sets across Facebook Marketplace, Craigslist, and OfferUp." />
+  <style>
+    :root {
+      --bg: #08101f;
+      --panel: #0f1730;
+      --panel-soft: rgba(15, 23, 48, 0.78);
+      --text: #eef2ff;
+      --muted: #c7d2fe;
+      --line: #27406b;
+      --brand: #5eead4;
+      --brand-2: #2563eb;
+      --light-bg: #eef4fb;
+      --ink: #0f172a;
+      --ink-soft: #475569;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      background: linear-gradient(180deg, #07101d 0%, #0d1730 58%, var(--light-bg) 58%, var(--light-bg) 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .hero { padding: 72px 0 52px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(94, 234, 212, 0.13);
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 18px 0 14px;
+      font-size: 50px;
+      line-height: 1.03;
+      letter-spacing: -.03em;
+      max-width: 840px;
+    }
+    .sub {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    .hero-points {
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: #dbeafe;
+    }
+    .hero-points li { margin: 8px 0; }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0 12px;
+    }
+    .cta, .cta-secondary, .cta-tertiary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .15s ease;
+    }
+    .cta:hover, .cta-secondary:hover, .cta-tertiary:hover { transform: translateY(-1px); }
+    .cta {
+      background: linear-gradient(135deg, #0f766e, #2563eb);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37,99,235,.24);
+    }
+    .cta-secondary {
+      background: rgba(94, 234, 212, 0.1);
+      color: #e6fffb;
+      border: 1px solid rgba(94, 234, 212, 0.4);
+    }
+    .cta-tertiary {
+      background: transparent;
+      color: #dbeafe;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .proof, .card, .faq, .mini, .kit {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+    .proof {
+      background: var(--panel-soft);
+      padding: 22px;
+    }
+    .proof h3, .kit h3 { margin-top: 0; }
+    .proof ul, .kit ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .proof li, .kit li { margin: 8px 0; }
+    .micro-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .micro-proof span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .mini {
+      background: rgba(94, 234, 212, 0.08);
+      padding: 14px;
+      text-align: center;
+    }
+    .mini b {
+      display: block;
+      color: white;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .kit {
+      margin-top: 16px;
+      background: rgba(15, 118, 110, 0.1);
+      padding: 18px;
+    }
+    .kit strong { color: white; }
+    .section-light {
+      color: var(--ink);
+      padding: 44px 0 72px;
+    }
+    .section-light h2 {
+      text-align: center;
+      font-size: 34px;
+      margin: 0 0 10px;
+      letter-spacing: -.02em;
+    }
+    .lead {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: var(--ink-soft);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: white;
+      color: var(--ink);
+      padding: 28px;
+      border-color: #d9e4f2;
+      box-shadow: 0 12px 40px rgba(15,23,42,.08);
+    }
+    .badge {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #ccfbf1;
+      color: #0f766e;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .price {
+      font-size: 40px;
+      font-weight: 900;
+      margin: 14px 0 6px;
+      letter-spacing: -.03em;
+    }
+    .price small {
+      font-size: 16px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .list {
+      margin: 16px 0 18px;
+      padding-left: 18px;
+      color: #334155;
+    }
+    .list li { margin: 8px 0; }
+    .support-note {
+      margin-top: 14px;
+      color: #475569;
+      font-size: 14px;
+    }
+    .support-note a {
+      color: #0f766e;
+      font-weight: 700;
+    }
+    .faq-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .faq {
+      background: white;
+      border-color: #d9e4f2;
+      padding: 20px;
+      box-shadow: 0 10px 32px rgba(15,23,42,.06);
+    }
+    .faq h3 { margin-top: 0; }
+    footer {
+      color: #cbd5e1;
+      text-align: center;
+      padding: 24px 20px 36px;
+      font-size: 14px;
+    }
+    @media (max-width: 920px) {
+      .hero-grid, .cards, .faq-wrap, .stats {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 38px; }
+      .sub { font-size: 18px; }
+      .cta-row { flex-direction: column; }
+      .cta, .cta-secondary, .cta-tertiary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Furniture flipper workflow</span>
+        <h1>FlipFlow helps furniture flippers post faster, answer buyers quicker, and lose fewer weekends to no-shows.</h1>
+        <p class="sub">If you are moving couches, dressers, dining sets, accent chairs, and estate-sale finds through Facebook Marketplace, Craigslist, or OfferUp, FlipFlow gives you a tighter listing + buyer-reply system without forcing a call first.</p>
+        <ul class="hero-points">
+          <li>Rewrite rough listings into cleaner versions for multiple networks without starting from scratch.</li>
+          <li>Use reply scripts for “Is this available?”, lowballers, pickup coordination, and ghosting recovery.</li>
+          <li>Track which pieces are listed, who is serious, who flakes, and what needs a fast relist before the weekend.</li>
+        </ul>
+        <div class="cta-row">
+          <a class="cta" href="https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05">Start Solo Pilot — $49/mo</a>
+          <a class="cta-secondary" href="https://buy.stripe.com/3cI8wQ2rVgXd9Fmh0cenS06">Start Micro-Dealer — $149/mo</a>
+          <a class="cta-tertiary" href="app.html">Try the live MVP first</a>
+        </div>
+        <div class="micro-proof">
+          <span>Built for messy local resale</span>
+          <span>No demo call required</span>
+          <span>Works with the live MVP today</span>
+        </div>
+      </div>
+      <div>
+        <div class="proof">
+          <h3>What furniture sellers usually need help with</h3>
+          <ul>
+            <li>Turning weak photo-dump listings into titles and descriptions that actually get replies.</li>
+            <li>Handling repetitive buyer messages without sounding robotic or wasting hours in DMs.</li>
+            <li>Reducing no-shows for pickups on bulky items where timing matters.</li>
+            <li>Keeping dressers, couches, and table sets organized across reposts and multiple surfaces.</li>
+          </ul>
+          <div class="stats">
+            <div class="mini"><b>1</b>raw listing → cleaner multi-network copy</div>
+            <div class="mini"><b>Less</b>pickup chaos and flaky buyers</div>
+            <div class="mini"><b>More</b>inventory turned each week</div>
+          </div>
+        </div>
+        <div class="kit">
+          <h3>What you get right after checkout</h3>
+          <ul>
+            <li><strong>Day 0:</strong> FlipFlow pilot workflow, furniture-specific listing cleanup structure, and buyer reply bank.</li>
+            <li><strong>First week:</strong> tighten active listings, relist old inventory faster, and standardize pickup coordination.</li>
+            <li><strong>Upgrade path:</strong> move to Micro-Dealer when you have more volume, helpers, or multiple sourcing channels.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="wrap">
+      <h2>Choose the fastest path for furniture inventory</h2>
+      <p class="lead">Start with the low-friction solo workflow or move straight to the micro-dealer setup if you have a constant stream of furniture coming in.</p>
+      <div class="cards">
+        <article class="card">
+          <span class="badge">Best for solo flippers</span>
+          <h3>Solo Seller Pilot</h3>
+          <div class="price">$49 <small>/mo</small></div>
+          <p>For furniture sellers who want faster relists, better copy, and cleaner buyer handling without adding more apps to the stack.</p>
+          <ul class="list">
+            <li>Furniture listing cleanup templates</li>
+            <li>Buyer reply bank for pickup and hold requests</li>
+            <li>No-show prevention scripts for bulky-item coordination</li>
+            <li>Weekly relist workflow for aging inventory</li>
+          </ul>
+          <a class="cta" href="https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05">Start Solo Pilot Checkout</a>
+          <p class="support-note">Need a human first? Email <a href="mailto:brent@operator.fyi?subject=FlipFlow%20Furniture%20Solo%20Pilot">brent@operator.fyi</a>.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Best for volume sellers</span>
+          <h3>Micro-Dealer Pilot</h3>
+          <div class="price">$149 <small>/mo</small></div>
+          <p>For furniture operators juggling multiple active pieces, helper coordination, and cross-posting across several local networks.</p>
+          <ul class="list">
+            <li>Cross-network posting prep for furniture inventory</li>
+            <li>Inventory tracking across pieces, sets, and sourcing batches</li>
+            <li>Buyer qualification scripts for serious pickup intent</li>
+            <li>Pickup coordination system for higher-volume resale</li>
+          </ul>
+          <a class="cta" href="https://buy.stripe.com/3cI8wQ2rVgXd9Fmh0cenS06">Start Micro-Dealer Checkout</a>
+          <p class="support-note">Need a custom workflow? Email <a href="mailto:brent@operator.fyi?subject=FlipFlow%20Furniture%20Micro-Dealer%20Pilot">brent@operator.fyi</a>.</p>
+        </article>
+      </div>
+      <div class="faq-wrap">
+        <div class="faq">
+          <h3>Can I try the product before paying?</h3>
+          <p>Yes. Open the <a href="app.html" style="color:#0f766e;font-weight:700;">live FlipFlow MVP</a> to rewrite listings, generate replies, and track inventory in-browser before choosing a pilot.</p>
+        </div>
+        <div class="faq">
+          <h3>Does this only work for Facebook Marketplace?</h3>
+          <p>No. Facebook Marketplace is the clearest starting behavior, but the workflow is built to support Craigslist, OfferUp, and any local resale surface where furniture sellers keep reposting similar inventory.</p>
+        </div>
+        <div class="faq">
+          <h3>Who is this page built for first?</h3>
+          <p>Furniture flippers, estate-sale pickers, small used-furniture dealers, and local sellers constantly reposting couches, dressers, tables, chairs, and bundles.</p>
+        </div>
+        <div class="faq">
+          <h3>Why make a seller-specific page?</h3>
+          <p>Because it is easier to share in niche communities, Facebook groups, listing profiles, and DMs when the page speaks directly to furniture-selling pain instead of generic marketplace software language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>FlipFlow for furniture flippers • sell more inventory with less DM chaos and fewer wasted pickups.</footer>
+</body>
+</html>

@@ -5,6 +5,7 @@ Public GitHub Pages landing page and usable MVP for the FlipFlow marketplace sel
 Live site:
 - https://kuleana808.github.io/flipflow-marketplace-operator/
 - https://kuleana808.github.io/flipflow-marketplace-operator/app.html
+- https://kuleana808.github.io/flipflow-marketplace-operator/furniture-flippers.html
 
 Live checkout links:
 - Solo Pilot ($49/mo): https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05
