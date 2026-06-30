@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlipFlow Seller Assistant</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <p class="eyebrow">FlipFlow</p>
+      <h1>Seller Assistant</h1>
+      <p class="sub">Rewrite listings, generate replies, and keep reusable snippets close to the seller workflow.</p>
+    </header>
+
+    <section class="card">
+      <label for="listingTitle">Item title</label>
+      <input id="listingTitle" type="text" placeholder="Samsung stainless fridge" />
+
+      <div class="row two">
+        <div>
+          <label for="price">Price</label>
+          <input id="price" type="text" placeholder="450" />
+        </div>
+        <div>
+          <label for="condition">Condition</label>
+          <select id="condition">
+            <option>Used - good</option>
+            <option>Used - like new</option>
+            <option>Used - fair</option>
+            <option>New</option>
+            <option>Refurbished</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="pickupArea">Pickup area</label>
+      <input id="pickupArea" type="text" placeholder="Pearl City / Kapolei" />
+
+      <label for="details">Details</label>
+      <textarea id="details" placeholder="Paste the raw listing details, condition notes, accessories, dimensions, issues, pickup window, delivery options..."></textarea>
+
+      <div class="actions">
+        <button id="generateListingBtn" class="primary">Generate listing copy</button>
+        <button id="saveSnippetBtn" class="secondary">Save as snippet</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Listing outputs</h2>
+      <div class="output-group">
+        <h3>Marketplace version</h3>
+        <pre id="marketplaceOutput">Generate copy to see output.</pre>
+      </div>
+      <div class="output-group">
+        <h3>Craigslist version</h3>
+        <pre id="craigslistOutput">Generate copy to see output.</pre>
+      </div>
+      <div class="output-group">
+        <h3>Short bio / profile version</h3>
+        <pre id="profileOutput">Generate copy to see output.</pre>
+      </div>
+      <button id="copyListingBtn" class="ghost">Copy marketplace version</button>
+    </section>
+
+    <section class="card">
+      <h2>Buyer reply generator</h2>
+      <div class="row two">
+        <div>
+          <label for="buyerName">Buyer name</label>
+          <input id="buyerName" type="text" placeholder="Alex" />
+        </div>
+        <div>
+          <label for="replyType">Scenario</label>
+          <select id="replyType">
+            <option value="available">Is this available?</option>
+            <option value="lowball">Lowball offer</option>
+            <option value="pickup">Pickup coordination</option>
+            <option value="ghost">Ghosting / no-show follow-up</option>
+          </select>
+        </div>
+      </div>
+      <label for="buyerContext">Context</label>
+      <textarea id="buyerContext" placeholder="Paste the buyer message or describe the situation."></textarea>
+      <div class="actions">
+        <button id="generateReplyBtn" class="primary">Generate reply</button>
+        <button id="copyReplyBtn" class="ghost">Copy reply</button>
+      </div>
+      <pre id="replyOutput">Generate a reply to see output.</pre>
+    </section>
+
+    <section class="card">
+      <div class="saved-header">
+        <h2>Saved snippets</h2>
+        <button id="clearSavedBtn" class="ghost danger">Clear</button>
+      </div>
+      <div id="savedSnippets" class="saved-list">
+        <p class="empty">No saved snippets yet.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Works fully in-browser. No account required for this prototype.
+    </footer>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "FlipFlow Seller Assistant",
+  "version": "0.1.0",
+  "description": "Rewrite marketplace listings, generate buyer replies, and save seller workflow snippets.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://*.facebook.com/*",
+    "https://*.craigslist.org/*",
+    "https://offerup.com/*",
+    "https://*.offerup.com/*"
+  ],
+  "action": {
+    "default_title": "FlipFlow Seller Assistant",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://*.craigslist.org/*",
+        "https://offerup.com/*",
+        "https://*.offerup.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
