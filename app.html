@@ -167,6 +167,59 @@
     .small { font-size: 13px; }
     .helper-list { margin: 0; padding-left: 18px; color: #475569; }
     .helper-list li { margin: 6px 0; }
+    .pilot-guide {
+      background: linear-gradient(180deg, #f4fbff 0%, #ffffff 100%);
+      border: 1px solid #cfe5f6;
+    }
+    .pilot-guide .eyebrow-note {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #dff7ff;
+      color: #075985;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .pilot-recommendation {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+    .pilot-recommendation strong {
+      display: block;
+      color: #0f172a;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .pilot-recommendation p {
+      margin: 0;
+      color: #334155;
+    }
+    .pilot-checklist {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: #334155;
+    }
+    .pilot-checklist li { margin: 7px 0; }
+    .pilot-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .pilot-actions a {
+      text-decoration: none;
+      text-align: center;
+    }
+    .pilot-caption {
+      margin-top: 12px;
+      color: #475569;
+      font-size: 13px;
+    }
     @media (max-width: 960px) {
       .hero-grid, .grid, .row-2, .row-3, .stats, .inventory-meta { grid-template-columns: 1fr; }
       h1 { font-size: 34px; }
@@ -310,13 +363,24 @@
           <div class="inventory-list" id="inventoryList"></div>
         </div>
 
-        <div class="shell">
-          <h2>Start a paid pilot</h2>
-          <p class="muted">If this MVP already looks like something you would use, skip the call-first friction and start with a live pilot now.</p>
-          <div class="button-row">
-            <a class="primary" href="https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05" style="text-decoration:none;display:inline-block;padding:13px 16px;border-radius:12px;font-weight:800;background:linear-gradient(135deg, #0f766e, #2563eb);color:white;">Start Solo Pilot — $49/mo</a>
-            <a class="secondary" href="https://buy.stripe.com/3cI8wQ2rVgXd9Fmh0cenS06" style="text-decoration:none;display:inline-block;padding:13px 16px;border-radius:12px;font-weight:800;background:#e2e8f0;color:#0f172a;">Start Micro-Dealer Pilot — $149/mo</a>
+        <div class="shell pilot-guide">
+          <span class="eyebrow-note">Best next step after trying the app</span>
+          <h2>See which pilot fits your selling workflow</h2>
+          <p class="muted">Use the MVP for a minute, then let FlipFlow point you to the fastest paid path. This keeps the buy-now decision simple for hot-intent sellers.</p>
+          <div class="pilot-recommendation" id="pilotRecommendation">
+            <strong>Start with the Solo Pilot if you are testing with 1–2 active listings.</strong>
+            <p>If you are already juggling multiple listings, buyer follow-up, and relists every week, the Micro-Dealer Pilot is usually the better fit.</p>
           </div>
+          <ul class="pilot-checklist" id="pilotChecklist">
+            <li>Solo Pilot = best for one operator who mainly needs better listing copy, reply speed, and fewer no-show headaches.</li>
+            <li>Micro-Dealer Pilot = best for sellers handling several listings, multiple pickup conversations, or cross-posting across networks.</li>
+            <li>Both options go straight to live checkout — no demo call required first.</li>
+          </ul>
+          <div class="pilot-actions">
+            <a class="primary" id="soloPilotLink" href="https://buy.stripe.com/7sY9AUfeHgXd3gY39menS05" style="display:inline-block;padding:13px 16px;border-radius:12px;font-weight:800;background:linear-gradient(135deg, #0f766e, #2563eb);color:white;">Start Solo Pilot — $49/mo</a>
+            <a class="secondary" id="microDealerLink" href="https://buy.stripe.com/3cI8wQ2rVgXd9Fmh0cenS06" style="display:inline-block;padding:13px 16px;border-radius:12px;font-weight:800;background:#e2e8f0;color:#0f172a;">Start Micro-Dealer Pilot — $149/mo</a>
+          </div>
+          <p class="pilot-caption" id="pilotCaption">Tip: generate a listing, create a buyer reply, or save inventory to sharpen the recommendation.</p>
           <p class="small" style="margin-top:12px;">Need a custom setup first? Email <a href="mailto:brent@operator.fyi?subject=FlipFlow%20Pilot">brent@operator.fyi</a>.</p>
         </div>
 
@@ -339,6 +403,41 @@
 
     function clean(value) {
       return (value || '').trim();
+    }
+
+    function updatePilotRecommendation(trigger) {
+      const inventoryCount = getInventory().length;
+      const category = clean(document.getElementById('category').value).toLowerCase();
+      const features = clean(document.getElementById('features').value).toLowerCase();
+      const title = clean(document.getElementById('itemTitle').value).toLowerCase();
+      const recommendation = document.getElementById('pilotRecommendation');
+      const checklist = document.getElementById('pilotChecklist');
+      const caption = document.getElementById('pilotCaption');
+      const soloLink = document.getElementById('soloPilotLink');
+      const microLink = document.getElementById('microDealerLink');
+
+      const heavierWorkflow = inventoryCount >= 3
+        || category === 'vehicle'
+        || /dealer|pallet|liquidation|delivery|multiple|bundle|set/.test(features)
+        || /dealer|fleet|bundle|set/.test(title);
+
+      if (heavierWorkflow) {
+        recommendation.innerHTML = '<strong>Micro-Dealer Pilot is the best fit right now.</strong><p>You are showing signs of a multi-listing or more operational workflow, so the $149/mo path is more likely to save real time immediately.</p>';
+        checklist.innerHTML = '<li>Best for several active listings, repeat buyer conversations, or multi-network posting prep.</li><li>Use it when inventory coordination and pickup follow-up are becoming their own job.</li><li>Checkout is live now if you want to lock in the heavier workflow immediately.</li>';
+        caption.textContent = trigger === 'inventory'
+          ? 'Recommendation updated from the inventory you saved in the app.'
+          : 'Recommendation updated from the workflow signals in your current inputs.';
+        microLink.style.boxShadow = '0 0 0 3px rgba(37,99,235,.18)';
+        soloLink.style.boxShadow = 'none';
+      } else {
+        recommendation.innerHTML = '<strong>Solo Pilot is the fastest paid next step.</strong><p>Your current usage looks like a single-operator workflow where tighter listing copy, faster replies, and a cleaner relist cadence will matter first.</p>';
+        checklist.innerHTML = '<li>Best for one seller testing a tighter listing + buyer reply workflow right away.</li><li>Useful when you want more serious pickup conversations without adding team complexity yet.</li><li>Checkout is live now if the MVP already feels directionally right.</li>';
+        caption.textContent = trigger === 'inventory'
+          ? 'Recommendation updated after saving inventory in the app.'
+          : 'Recommendation updated from the listing and buyer-reply workflow you just tested.';
+        soloLink.style.boxShadow = '0 0 0 3px rgba(15,118,110,.18)';
+        microLink.style.boxShadow = 'none';
+      }
     }
 
     function titleCase(text) {
@@ -386,6 +485,7 @@
       document.getElementById('fbOutput').textContent = fb;
       document.getElementById('clOutput').textContent = cl;
       document.getElementById('ouOutput').textContent = ou;
+      updatePilotRecommendation('listing');
     }
 
     function generateReply() {
@@ -407,6 +507,7 @@
       }
 
       document.getElementById('replyOutput').textContent = reply;
+      updatePilotRecommendation('reply');
     }
 
     function getInventory() {
@@ -451,6 +552,7 @@
         createdAt: new Date().toLocaleString()
       });
       setInventory(items);
+      updatePilotRecommendation('inventory');
     }
 
     function removeInventory(id) {
@@ -488,11 +590,13 @@
         }
       ];
       setInventory(sample);
+      updatePilotRecommendation('inventory');
     }
 
     function clearInventory() {
       localStorage.removeItem(inventoryKey);
       renderInventory();
+      updatePilotRecommendation('inventory');
     }
 
     function renderInventory() {
@@ -552,6 +656,7 @@
     document.getElementById('loadDemoBtn').addEventListener('click', loadDemo);
 
     renderInventory();
+    updatePilotRecommendation('inventory');
   </script>
 </body>
 </html>
