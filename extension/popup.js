@@ -7,13 +7,30 @@ const buyerName = document.getElementById('buyerName');
 const buyerContext = document.getElementById('buyerContext');
 const replyType = document.getElementById('replyType');
 
+const queueBuyerName = document.getElementById('queueBuyerName');
+const queueStatus = document.getElementById('queueStatus');
+const queueOffer = document.getElementById('queueOffer');
+const queuePickup = document.getElementById('queuePickup');
+const queueNotes = document.getElementById('queueNotes');
+
 const marketplaceOutput = document.getElementById('marketplaceOutput');
 const craigslistOutput = document.getElementById('craigslistOutput');
 const profileOutput = document.getElementById('profileOutput');
 const replyOutput = document.getElementById('replyOutput');
 const savedSnippets = document.getElementById('savedSnippets');
+const buyerQueue = document.getElementById('buyerQueue');
 
 const STORAGE_KEY = 'flipflow_saved_snippets_v1';
+const QUEUE_KEY = 'flipflow_buyer_queue_v1';
+const STATUS_ORDER = {
+  scheduled: 0,
+  offered: 1,
+  interested: 2,
+  backup: 3,
+  ghosted: 4,
+  relist: 5,
+  sold: 6
+};
 
 function clean(value) {
   return (value || '').trim();
@@ -55,6 +72,8 @@ function generateListingVariants() {
   const payload = getListingPayload();
   if (!payload.title || !payload.price || !payload.details) {
     marketplaceOutput.textContent = 'Add a title, price, and details first.';
+    craigslistOutput.textContent = 'Add a title, price, and details first.';
+    profileOutput.textContent = 'Add a title, price, and details first.';
     return;
   }
 
@@ -101,9 +120,41 @@ function renderSaved(items) {
   `).join('');
 }
 
+function renderQueue(items) {
+  if (!items.length) {
+    buyerQueue.innerHTML = '<p class="empty">No buyers tracked yet.</p>';
+    return;
+  }
+  const sorted = [...items].sort((a, b) => {
+    const scoreA = STATUS_ORDER[a.status] ?? 99;
+    const scoreB = STATUS_ORDER[b.status] ?? 99;
+    if (scoreA !== scoreB) return scoreA - scoreB;
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+  });
+  buyerQueue.innerHTML = sorted.map((item) => `
+    <div class="queue-item">
+      <div class="queue-head">
+        <strong>${item.name}</strong>
+        <span class="queue-status status-${item.status}">${item.status.replace('-', ' ')}</span>
+      </div>
+      <div class="queue-meta">
+        <span>Offer: ${item.offer || '—'}</span>
+        <span>Pickup: ${item.pickup || '—'}</span>
+        <span>Item: ${item.itemTitle || '—'}</span>
+      </div>
+      <div class="queue-notes">${item.notes || 'No notes yet.'}</div>
+    </div>
+  `).join('');
+}
+
 async function loadSaved() {
   const data = await chrome.storage.local.get(STORAGE_KEY);
   renderSaved(data[STORAGE_KEY] || []);
+}
+
+async function loadQueue() {
+  const data = await chrome.storage.local.get(QUEUE_KEY);
+  renderQueue(data[QUEUE_KEY] || []);
 }
 
 async function saveSnippet() {
@@ -121,9 +172,37 @@ async function saveSnippet() {
   renderSaved(next);
 }
 
+async function saveQueueBuyer() {
+  const name = clean(queueBuyerName.value);
+  if (!name) return;
+  const data = await chrome.storage.local.get(QUEUE_KEY);
+  const existing = data[QUEUE_KEY] || [];
+  const item = {
+    name,
+    status: clean(queueStatus.value).toLowerCase(),
+    offer: clean(queueOffer.value),
+    pickup: clean(queuePickup.value),
+    notes: clean(queueNotes.value),
+    itemTitle: clean(listingTitle.value),
+    timestamp: new Date().toISOString()
+  };
+  const next = [item, ...existing].slice(0, 30);
+  await chrome.storage.local.set({ [QUEUE_KEY]: next });
+  renderQueue(next);
+  queueBuyerName.value = '';
+  queueOffer.value = '';
+  queuePickup.value = '';
+  queueNotes.value = '';
+}
+
 async function clearSaved() {
   await chrome.storage.local.remove(STORAGE_KEY);
   renderSaved([]);
+}
+
+async function clearQueue() {
+  await chrome.storage.local.remove(QUEUE_KEY);
+  renderQueue([]);
 }
 
 document.getElementById('generateListingBtn').addEventListener('click', generateListingVariants);
@@ -132,7 +211,10 @@ document.getElementById('copyListingBtn').addEventListener('click', () => copyTe
 document.getElementById('copyReplyBtn').addEventListener('click', () => copyText(replyOutput.textContent));
 document.getElementById('saveSnippetBtn').addEventListener('click', saveSnippet);
 document.getElementById('clearSavedBtn').addEventListener('click', clearSaved);
+document.getElementById('saveQueueBuyerBtn').addEventListener('click', saveQueueBuyer);
+document.getElementById('clearQueueBtn').addEventListener('click', clearQueue);
 
 generateListingVariants();
 generateReply();
 loadSaved();
+loadQueue();

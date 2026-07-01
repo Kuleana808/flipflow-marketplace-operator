@@ -95,4 +95,16 @@ pre {
 }
 .saved-item strong { display: block; margin-bottom: 4px; }
 .saved-item p { margin: 0; color: var(--muted); font-size: 12px; }
+.queue-item { border: 1px solid #25365d; border-radius: 12px; padding: 10px; background: #0d1730; }
+.queue-head { display:flex; justify-content:space-between; gap:8px; align-items:center; margin-bottom:6px; }
+.queue-status { border-radius:999px; padding:4px 8px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+.status-interested { background:#0f2f4a; color:#93c5fd; }
+.status-offered { background:#3a2811; color:#fdba74; }
+.status-scheduled { background:#16351f; color:#86efac; }
+.status-backup { background:#312e81; color:#c4b5fd; }
+.status-ghosted { background:#3f1d1d; color:#fca5a5; }
+.status-sold { background:#14532d; color:#bbf7d0; }
+.status-relist { background:#3b2f0d; color:#fde68a; }
+.queue-meta { display:grid; gap:4px; color:var(--muted); font-size:12px; margin-bottom:6px; }
+.queue-notes { color:#dbe7ff; font-size:12px; line-height:1.5; }
 .footer { text-align: center; padding: 4px 0 6px; }

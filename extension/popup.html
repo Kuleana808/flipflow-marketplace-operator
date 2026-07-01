@@ -91,6 +91,47 @@
     </section>
 
     <section class="card">
+      <h2>Buyer queue</h2>
+      <div class="row two">
+        <div>
+          <label for="queueBuyerName">Buyer name</label>
+          <input id="queueBuyerName" type="text" placeholder="Jordan" />
+        </div>
+        <div>
+          <label for="queueStatus">Status</label>
+          <select id="queueStatus">
+            <option value="interested">Interested</option>
+            <option value="offered">Offered</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="backup">Backup</option>
+            <option value="ghosted">Ghosted</option>
+            <option value="sold">Sold</option>
+            <option value="relist">Relist recommended</option>
+          </select>
+        </div>
+      </div>
+      <div class="row two">
+        <div>
+          <label for="queueOffer">Offer / price</label>
+          <input id="queueOffer" type="text" placeholder="$425 cash" />
+        </div>
+        <div>
+          <label for="queuePickup">Pickup window</label>
+          <input id="queuePickup" type="text" placeholder="Today 6–7pm" />
+        </div>
+      </div>
+      <label for="queueNotes">Notes</label>
+      <textarea id="queueNotes" placeholder="Serious buyer, asked for dimensions, can bring truck, wants exact address after confirmation..."></textarea>
+      <div class="actions">
+        <button id="saveQueueBuyerBtn" class="primary">Save buyer</button>
+        <button id="clearQueueBtn" class="ghost danger">Clear queue</button>
+      </div>
+      <div id="buyerQueue" class="saved-list">
+        <p class="empty">No buyers tracked yet.</p>
+      </div>
+    </section>
+
+    <section class="card">
       <div class="saved-header">
         <h2>Saved snippets</h2>
         <button id="clearSavedBtn" class="ghost danger">Clear</button>
@@ -101,7 +142,7 @@
     </section>
 
     <footer class="footer">
-      Works fully in-browser. No account required for this prototype.
+      v0.2 direction: buyer queue + reply workflow for local Marketplace sellers.
     </footer>
   </main>
 
